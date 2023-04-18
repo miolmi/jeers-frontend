@@ -1,11 +1,9 @@
 <div class="container">
-  <div class="modal">
-    <form [formGroup]="form" (ngSubmit)="login()">
-      <input type="text" name="email" formControlName="email" placeholder="email" />
-      <span *ngIf="form.controls.email.touched && form.controls.email.invalid" class="error-message">Please enter a valid email address.</span>
-      <input type="password" name="password" formControlName="password" placeholder="password" />
-      <input type="submit" value="Log In" />
-    </form>
-
-  </div>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <input type="text" name="email" [formControl]="form.controls.emailAddress" placeholder="email"/>
+    <span *ngIf="form.controls.emailAddress.touched && form.controls.emailAddress.invalid" class="error-message">Please enter a valid email address.</span>
+    <input type="password" name="password" [formControl]="form.controls.password" placeholder="password"/>
+    <span *ngIf="invalidCredentials" class="error-message">Invalid email address or password.</span>
+    <input type="submit" value="Log In"/>
+  </form>
 </div>

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocalStorageService} from "./services/local-storage.service";
+import {filter, switchMap} from "rxjs";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,13 @@ import {LocalStorageService} from "./services/local-storage.service";
 export class AppComponent implements OnInit {
 
   userId$ = this.localStorageService.getUserId();
+  user$ = this.userId$.pipe(
+    filter(userId => !!userId),
+    switchMap(userId => this.userService.loadById(userId))
+  )
 
-  constructor(private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private router: Router, private localStorageService: LocalStorageService, private userService: UserService) {
+  }
 
   ngOnInit(): void {
   }

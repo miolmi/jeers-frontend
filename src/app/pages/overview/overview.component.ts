@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Component} from '@angular/core';
+import {Observable} from "rxjs";
 import {Ticket} from "../../models/ticket.model";
 import {TicketService} from "../../services/ticket.service";
 
@@ -8,12 +8,10 @@ import {TicketService} from "../../services/ticket.service";
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent {
 
-  tickets$: Observable<Ticket[]> = this.ticketService.loadAll();
+  tickets$: Observable<Ticket[]> = this.ticketService.loadAll().pipe();
 
-  constructor(private ticketService: TicketService) { }
-
-  ngOnInit() {
+  constructor(private ticketService: TicketService) {
   }
 }

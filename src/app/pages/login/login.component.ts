@@ -1,45 +1,51 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {LoginResponseDto} from "../../models/login-response.dto";
-import {LoginRequestDto} from "../../models/login-request.dto";
+import {Component} from '@angular/core';
+import {NonNullableFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../services/local-storage.service";
+import {AuthenticationService} from "../../services/authentication.service";
+import {ErrorResponseDTO} from "../../models/error-response.dto";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   form = this.formBuilder.group({
-    email: ['', Validators.email],
-    password: [''],
+    emailAddress: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required]],
   })
 
+  invalidCredentials = false;
+
   constructor(
-    private formBuilder: FormBuilder,
-    private httpClient: HttpClient,
+    private formBuilder: NonNullableFormBuilder,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private authService: AuthenticationService,
   ) {
   }
 
   public login(): void {
+    this.invalidCredentials = false;
+
     if (this.form.valid) {
-      const request: LoginRequestDto = {
-        email: this.form.controls.email.value,
-        password: this.form.controls.password.value,
-      }
+      const emailAddress = this.form.controls.emailAddress.value;
+      const password = this.form.controls.password.value;
 
-      this.httpClient.post<LoginResponseDto>('http://localhost:8080/jeers-web/api/user', request).subscribe(value => {
-        this.localStorageService.setUserId(value.id)
-        this.router.navigate(['overview'])
-      })
+      this.authService.login({
+          emailAddress,
+          password
+        }
+      ).subscribe({
+        next: response => {
+          this.router.navigate(['overview']);
+        },
+        error: (response: ErrorResponseDTO) => {
+          if (response.error.type === 'InvalidCredentials') {
+            this.invalidCredentials = true;
+          }
+        }
+      });
     }
-  }
-
-  ngOnInit() {
   }
 }

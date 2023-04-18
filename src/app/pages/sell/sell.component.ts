@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {NonNullableFormBuilder, Validators} from "@angular/forms";
 import {TicketService} from "../../services/ticket.service";
 
 @Component({
@@ -7,31 +7,26 @@ import {TicketService} from "../../services/ticket.service";
   templateUrl: './sell.component.html',
   styleUrls: ['./sell.component.scss']
 })
-export class SellComponent implements OnInit {
+export class SellComponent {
 
   public ticketForm = this.form.group({
-    event: ['', [Validators.required]],
     description: ['', [Validators.required]],
-    price: ['', [Validators.required]]
+    price: ['', [Validators.required, Validators.min(0)]],
+    eventId: ['', [Validators.required]]
   });
 
   constructor(
     private ticketService: TicketService,
-    private form: FormBuilder,
+    private form: NonNullableFormBuilder,
   ) {
   }
 
-  ngOnInit() {
-  }
-
-
   sellTicket() {
-    console.log(this.ticketForm.valid);
-    if(this.ticketForm.valid) {
-      const description = this.ticketForm.get('description').value;
-      const price = this.ticketForm.get('price').value;
-      const event = this.ticketForm.get('event').value;
-      this.ticketService.sell(description, price, event);
+    if (this.ticketForm.valid) {
+      const description = this.ticketForm.controls.description.value;
+      const price = Number(this.ticketForm.controls.price.value);
+      const eventId = Number(this.ticketForm.controls.eventId.value);
+      this.ticketService.sell(description, price, eventId);
     }
   }
 }

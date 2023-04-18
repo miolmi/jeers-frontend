@@ -1,7 +1,6 @@
 .background {
   min-height: 100vh;
   background-color: #eaeaea;
-  background-image: url("/assets/wacken-wallpaper-2.jpg");
   background-repeat: no-repeat;
   background-position: 170% 0%;
   background-size: contain;
@@ -11,6 +10,11 @@
 
 .navigation {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  border-bottom: 1px solid #afafaf;
 }
 
 .navigation__title {
@@ -25,24 +29,19 @@
 }
 
 .navigation__links {
-  display: inline-block;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navigation__link {
-  border: 1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
 
   text-decoration: none;
-  color: white;
+}
 
-  padding: 4px;
-  margin: 0px 8px;
-
-  &:hover {
-    border-bottom: 1px solid #c4c4c4;
-    border-radius: 0px;
-  }
+.navigation__user-information .name {
+  font-weight: 500;
 }
 
 .content {
