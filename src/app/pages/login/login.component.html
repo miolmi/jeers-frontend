@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="modal">
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <input type="text" name="email" formControlName="email" placeholder="email" />
+      <span *ngIf="form.controls.email.touched && form.controls.email.invalid" class="error-message">Please enter a valid email address.</span>
+      <input type="password" name="password" formControlName="password" placeholder="password" />
+      <input type="submit" value="Log In" />
+    </form>
+
+  </div>
+</div>

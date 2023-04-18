@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="ticketForm" (ngSubmit)="sellTicket()">
+    <div class="form__row">
+      <label for="event">Event: </label>
+      <select id="event" formControlName="event">
+        <option value="1">Frauenfeld</option>
+        <option value="2">Greenfield</option>
+        <option value="3">Gampel</option>
+      </select>
+      <span *ngIf="ticketForm.controls.event.touched && ticketForm.controls.event.invalid" class="error-message">Please enter a valid email event.</span>
+    </div>
+
+    <div class="form__row">
+      <label for="description">Description: </label>
+      <input type="text" formControlName="description" name="description" id="description"/>
+      <span *ngIf="ticketForm.controls.description.touched && ticketForm.controls.description.invalid" class="error-message">Please enter a valid description.</span>
+    </div>
+
+    <div class="form__row">
+      <label for="price">Price: </label>
+      <input type="text" formControlName="price" name="price" id="price"/>
+      <span *ngIf="ticketForm.controls.price.touched && ticketForm.controls.price.invalid" class="error-message">Please enter a valid price.</span>
+    </div>
+
+    <div class="form__actions">
+      <button mat-raised-button type="submit">Sell Ticket</button>
+    </div>
+  </form>
+</div>

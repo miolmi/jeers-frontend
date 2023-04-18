@@ -1,0 +1,54 @@
+.background {
+  min-height: 100vh;
+  background-color: #eaeaea;
+  background-image: url("/assets/wacken-wallpaper-2.jpg");
+  background-repeat: no-repeat;
+  background-position: 170% 0%;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  padding: 16px;
+}
+
+.navigation__title {
+  font-size: 32px;
+  text-transform: capitalize;
+  color: #525252;
+  font-weight: bold;
+  border-right: 1px solid #525252;
+  display: inline-block;
+  padding-right: 24px;
+  margin-right: 24px;
+}
+
+.navigation__links {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.navigation__link {
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+
+  text-decoration: none;
+  color: white;
+
+  padding: 4px;
+  margin: 0px 8px;
+
+  &:hover {
+    border-bottom: 1px solid #c4c4c4;
+    border-radius: 0px;
+  }
+}
+
+.content {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 20px 0px 0px 122px;
+}
