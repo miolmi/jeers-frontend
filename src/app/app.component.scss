@@ -30,6 +30,7 @@
 
 .navigation__links {
   display: flex;
+  flex-grow: 1;
   align-items: center;
   gap: 8px;
 }
@@ -40,8 +41,20 @@
   text-decoration: none;
 }
 
-.navigation__user-information .name {
-  font-weight: 500;
+.navigation__user-information{
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .user {
+    border-right: 1px solid #cccccc;
+    padding-right: 8px;
+  }
+
+  .name {
+    font-weight: 500;
+  }
 }
 
 .content {

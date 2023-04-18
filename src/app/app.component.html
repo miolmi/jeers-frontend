@@ -1,21 +1,25 @@
-<div class="background">
-  <div class="navigation">
-    <div class="navigation__title">Jeers</div>
-    <div class="navigation__links">
-      <a mat-flat-button class="navigation__link" routerLink="overview">Tickets</a>
-      <a mat-flat-button class="navigation__link" routerLink="sell">Sell</a>
-      <a *ngIf="(userId$ | async) === 0 else logoutButton" mat-flat-button class="navigation__link" routerLink="login">Login</a>
+<ng-container *ngIf="{user: (user$ | async)} as view">
 
-      <div *ngIf="(user$ | async) as user" class="navigation__user-information">
-        Logged in as <span class="name">{{ user.firstName }} {{ user.lastName }}</span> --- Your balance: {{ user.balance }}$
+  <div class="background">
+    <div class="navigation">
+      <div class="navigation__title">Jeers</div>
+      <div class="navigation__links">
+        <a mat-flat-button class="navigation__link" routerLink="overview">Tickets</a>
+        <a mat-flat-button class="navigation__link" routerLink="sell">Sell</a>
+        <a *ngIf="!view.user" mat-flat-button class="navigation__link" routerLink="login">Login</a>
       </div>
-      <ng-template #logoutButton>
-        <button mat-flat-button class="navigation__link" (click)="logout()">Log out</button>
-      </ng-template>
+      <div *ngIf="view.user" class="navigation__user-information">
+        <div class="user">
+          Logged in as <span class="name">{{ view.user.firstName }} {{ view.user.lastName }}</span>
+        </div>
+        <div class="balance">Your balance: {{ view.user.balance }}$</div>
+        <button *ngIf="view.user" mat-flat-button class="navigation__link" (click)="logout()">Log out</button>
+      </div>
+
+    </div>
+
+    <div class="content">
+      <router-outlet></router-outlet>
     </div>
   </div>
-
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+</ng-container>

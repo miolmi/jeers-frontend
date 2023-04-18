@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NonNullableFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
-import {ErrorResponseDTO} from "../../models/error-response.dto";
 
 @Component({
   selector: 'app-login',
@@ -40,10 +39,8 @@ export class LoginComponent {
         next: response => {
           this.router.navigate(['overview']);
         },
-        error: (response: ErrorResponseDTO) => {
-          if (response.error.type === 'InvalidCredentials') {
-            this.invalidCredentials = true;
-          }
+        error: response => {
+          this.invalidCredentials = true;
         }
       });
     }

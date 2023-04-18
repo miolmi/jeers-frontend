@@ -26,7 +26,12 @@ export class SellComponent {
       const description = this.ticketForm.controls.description.value;
       const price = Number(this.ticketForm.controls.price.value);
       const eventId = Number(this.ticketForm.controls.eventId.value);
-      this.ticketService.sell(description, price, eventId);
+      this.ticketService.sell({
+        description,
+        price,
+        eventId,
+        sellerId: 1
+      });
     }
   }
 }

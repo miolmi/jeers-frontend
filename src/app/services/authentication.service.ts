@@ -16,8 +16,8 @@ export class AuthenticationService {
     private localStorageService: LocalStorageService) {
   }
 
-  login(loginParams: LoginRequestDTO) {
-    return this.httpClient.post<LoginResponseDTO>(environment.apiUrl + 'auth', loginParams).pipe(
+  login(data: LoginRequestDTO) {
+    return this.httpClient.post<LoginResponseDTO>(environment.apiUrl + 'auth', data).pipe(
       tap(response => this.localStorageService.setUserId(response.id))
     );
   }

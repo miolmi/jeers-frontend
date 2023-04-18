@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
-import {Ticket} from "../../models/ticket.model";
 import {TicketService} from "../../services/ticket.service";
 
 @Component({
@@ -10,7 +8,7 @@ import {TicketService} from "../../services/ticket.service";
 })
 export class OverviewComponent {
 
-  tickets$: Observable<Ticket[]> = this.ticketService.loadAll().pipe();
+  tickets$ = this.ticketService.loadAll();
 
   constructor(private ticketService: TicketService) {
   }
