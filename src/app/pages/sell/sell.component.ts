@@ -30,7 +30,7 @@ export class SellComponent {
         description,
         price,
         eventId,
-        sellerId: 1
+        sellerId: 1 // TODO: use logged in user id
       });
     }
   }

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NonNullableFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent {
     private formBuilder: NonNullableFormBuilder,
     private router: Router,
     private authService: AuthenticationService,
+    private localStorageService: LocalStorageService
   ) {
   }
 
@@ -37,6 +39,7 @@ export class LoginComponent {
         }
       ).subscribe({
         next: response => {
+          this.localStorageService.setUserId(response.id);
           this.router.navigate(['overview']);
         },
         error: response => {
