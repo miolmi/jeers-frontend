@@ -31,5 +31,4 @@ export class AppComponent implements OnInit {
     this.localStorageService.setUserId(0);
     this.router.navigate(['login'])
   }
-
 }

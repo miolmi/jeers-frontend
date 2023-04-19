@@ -1,14 +1,11 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="login()">
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <input type="text" name="firstname" [formControl]="form.controls.firstname" placeholder="firstname"/>
+    <input type="text" name="lastname" [formControl]="form.controls.lastname" placeholder="lastname"/>
     <input type="text" name="email" [formControl]="form.controls.emailAddress" placeholder="email"/>
     <span *ngIf="form.controls.emailAddress.touched && form.controls.emailAddress.invalid" class="error-message">Please enter a valid email address.</span>
     <input type="password" name="password" [formControl]="form.controls.password" placeholder="password"/>
     <span *ngIf="invalidCredentials" class="error-message">Invalid email address or password.</span>
-    <div>
-      <input type="submit" value="Log In"/>
-      <a routerLink="/register">
-        <button type="button">Register</button>
-      </a>
-    </div>
+    <input type="submit" value="Register"/>
   </form>
 </div>

@@ -3,12 +3,12 @@
     <form [formGroup]="ticketForm" (ngSubmit)="sellTicket()">
       <div class="form__row">
         <label for="event">Event: </label>
+
         <select id="event" [formControl]="ticketForm.controls.eventId">
           <!-- TODO: generate based on available events from backend -->
-          <option value="1">Frauenfeld</option>
-          <option value="2">Greenfield</option>
-          <option value="3">Gampel</option>
+          <option *ngFor="let event of eventSet | async" [value]="event.id">{{event.name}}</option>
         </select>
+
         <span *ngIf="ticketForm.controls.eventId.touched && ticketForm.controls.eventId.invalid" class="error-message">Please enter a valid email event.</span>
       </div>
 
